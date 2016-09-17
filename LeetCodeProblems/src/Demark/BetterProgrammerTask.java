@@ -15,14 +15,6 @@ import java.util.List;
 
 
 public class BetterProgrammerTask {
-public static void main(String args[])
-{
-	int i=Integer.MAX_VALUE;
-	String s="12 some text 3  7 "+i;
-			//System.out.println(getSumOfNumbers(s));
-			//System.out.println(countAlmostPrimeNumbers(1,3));
-			System.out.println(getProbability(5,1));
-}
 
 public static double getProbability(int Y, int X) {
     /*
@@ -106,10 +98,6 @@ public static int countAlmostPrimeNumbers(int from, int to) {
       return the number of almost prime numbers within the given range (inclusively).
      */
 }
-public static interface Node {
-    int getValue();
-    List<Node> getChildren();
-}
 public static List<Node> traverseTreeInDepth(Node root) {
 	Deque<Node> stackar = new LinkedList<Node>();
     List<Node> retvaar = new ArrayList<Node>(stackar.size());
@@ -158,6 +146,54 @@ public static List<Node> traverseTreeInDepth(Node root) {
           For example, s="12 some text 3  7", result: 22 (12+3+7=22)
          */
     }
-}
+
+        // Please do not change this interface
+        public static interface Node {
+            int getValue();
+            List<Node> getChildren();
+        }
+
+
+        public static int getLevelSum(Node root, int N) {
+            // Safe guard, probably redundant.
+            if (N <= 0) {
+                throw new IllegalArgumentException("N must be positive");
+            }
+
+            // We're at the level we want to sum, return the value
+            if (N == 1) {
+                return root.getValue();
+            }
+
+            int sum = 0;
+            for (Node child : root.getChildren()) {
+                sum += getLevelSum (child, N - 1);
+            }
+            return sum;
+        }
+        	// A simple recursive program to find n'th fibonacci number
+        	static int fib(int n)
+        	{
+        	if (n <= 1)
+        		return n;
+        	return fib(n-1) + fib(n-2);
+        	}
+        	
+        	// Returns number of ways to reach s'th stair
+        	static int countWays(int s)
+        	{
+        		return fib(s + 1);
+        	}
+
+
+        	/* Driver program to test above function */
+        	public static void main (String args[])
+        	{
+        		int s = 8;
+        		System.out.println("Number of ways = "+ countWays(s));
+        	}
+        
+
+    }
 
 	
